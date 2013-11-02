@@ -354,3 +354,22 @@ NoMethodError (undefined method `[]' for nil:NilClass):
   Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (24.6ms)
   Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
   Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (52.1ms)
+
+
+Started GET "/auth/facebook" for 127.0.0.1 at 2013-11-02 15:16:34 -0600
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/auth/facebook/callback?code=AQAmBF3lscBj_d88cXLvOQm8uw6KaZzSqvxEOtnePGZHrghPpF1pFt0sJnqgcDmM_fPqVuwwJLm8z7fTkVxEQLzjE4bkK_8m1Tep-oeRPIUSBVX8DYRflOGtcpvLsEWY2UCK1qEIpMdKHzIcAMTH8d9epb-Oe8SNfpmmF_3eeQ05Uw2Gh68TTU7MM09yu61C-hKGRich_ITqtzZsdOama9hcSnsYXMOKReqo8wkaswiTzRS5KhQZhDHTgQ_QTziLlx5bKQDIpZYsGxKBoZ2eDLmgpp9hBEVGYpODUgNBQiUyDp7vknA-kFwe0o96kCX1DNg&state=710392887f5c998de9e62b3341fd3b88c253ffb9d9f948be" for 127.0.0.1 at 2013-11-02 15:16:39 -0600
+Processing by SessionsController#create as HTML
+  Parameters: {"code"=>"AQAmBF3lscBj_d88cXLvOQm8uw6KaZzSqvxEOtnePGZHrghPpF1pFt0sJnqgcDmM_fPqVuwwJLm8z7fTkVxEQLzjE4bkK_8m1Tep-oeRPIUSBVX8DYRflOGtcpvLsEWY2UCK1qEIpMdKHzIcAMTH8d9epb-Oe8SNfpmmF_3eeQ05Uw2Gh68TTU7MM09yu61C-hKGRich_ITqtzZsdOama9hcSnsYXMOKReqo8wkaswiTzRS5KhQZhDHTgQ_QTziLlx5bKQDIpZYsGxKBoZ2eDLmgpp9hBEVGYpODUgNBQiUyDp7vknA-kFwe0o96kCX1DNg", "state"=>"710392887f5c998de9e62b3341fd3b88c253ffb9d9f948be", "facebook"=>"facebook"}
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `user' for nil:NilClass):
+  app/controllers/sessions_controller.rb:10:in `create'
+
+
+  Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.8ms)
+  Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.3ms)
+  Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.9ms)
+  Rendered /Users/ceegarner/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (19.5ms)
