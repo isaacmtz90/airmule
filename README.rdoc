@@ -1,3 +1,2 @@
-Airmule
-
-Service for renting luggage space
+#Airmule
+Send your stuff anywhere
