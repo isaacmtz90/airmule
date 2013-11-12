@@ -1,0 +1,40 @@
+<script type="text/javascript">
+/* removes the hash from facebook callback */
+if (window.location.hash == '#_=_') {
+    window.location.hash = ''; // for older browsers, leaves a # behind
+    history.pushState('', document.title, window.location.pathname); // nice and clean
+    e.preventDefault(); // no page reload
+}
+</script>
+
+ <div id="main" class="clearfix">
+    <!-- <?php 
+        if(isset($_GET["message"])) {
+            echo " <h3>Viaje creado exitosamente!</h3> ";
+        }
+    ?>-->
+    <h2 class="clearfix">Selecciona un destino.</h2>
+    <h3>Envia tu paquete</h3>
+
+    <form class="gray-box clearfix" method="post" action="result.php">  
+        <input class = "input_big" type = "text" placeholder = "Que destino buscas?" id="to" name="to" />
+        <input class = "input_big" type = "text" placeholder = "De donde?" id="from" name="from" />
+        <input class = "input_big" type = "text" placeholder = "Cuando?" id="date" name="date" readonly />
+        <input type="submit" value="Buscar" class="submit">
+    </form>
+</div>
+
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<%= javascript_include_tag "jquery.geocomplete.min.js" %>
+<script type="text/javascript">
+$().ready(function() {
+    $('#from').geocomplete();
+    $('#to').geocomplete();
+    $.datepicker.formatDate( "dd-mm-yyyy");
+    $( "#date" ).datepicker({
+        inline: true
+    });
+
+});
+</script>
