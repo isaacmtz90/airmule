@@ -13,9 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+  <% stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <% javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <% csrf_meta_tags %>
   <%= stylesheet_link_tag "normalize" %>
   <%= stylesheet_link_tag "main" %>
   <%= stylesheet_link_tag "cupertino/jquery-ui-1.10.3.custom" %>
@@ -42,7 +42,7 @@
               <a href='log_trip.php'>Agregar Viaje</a>
             </div>
             <div class='photo'>
-              <img src='<%current_user.image %>' height='40'></div>
+              <img src='<%= current_user.image %>' height='40'></div>
               <p> <%= current_user.name %> </p>
               <div class='inbox'><a href='#' class='inbox ir'></a></div>
               <%= link_to "Sign out", signout_path, id: "sign_out",class: "logout" %>
