@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131111225530) do
+ActiveRecord::Schema.define(version: 20131112233941) do
+
+  create_table "trips", force: true do |t|
+    t.string   "from_city"
+    t.string   "from_country"
+    t.string   "to_city"
+    t.string   "to_country"
+    t.date     "to_when"
+    t.date     "from_when"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "provider"

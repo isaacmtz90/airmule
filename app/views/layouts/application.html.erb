@@ -21,7 +21,7 @@
   <%= stylesheet_link_tag "cupertino/jquery-ui-1.10.3.custom" %>
   <%= javascript_include_tag "vendor/modernizr-2.6.2.min.js" %>
 
-  <script>window.jQuery || document.write('<script src="assets/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="../assets/vendor/jquery-1.10.2.min.js"><\/script>')</script>
   <%= javascript_include_tag "jquery-ui-1.10.3.custom.js" %>
   <%= javascript_include_tag "plugins.js" %>
   <%= javascript_include_tag "main.js" %>
@@ -34,12 +34,12 @@
 
   <!-- Add your site or application content here -->
   <header>
-      <h1><a href="index.php">Airmule</a></h1>
+      <h1><a href="/">Airmule</a></h1>
       <div id="user-widget">
         <% if current_user %>
           <div class='logged'>
             <div class='add-trip'>
-              <a href='log_trip.php'>Agregar Viaje</a>
+              <a href='/trips/new'>Agregar Viaje</a>
             </div>
             <div class='photo'>
               <img src='<%= current_user.image %>' height='40'></div>

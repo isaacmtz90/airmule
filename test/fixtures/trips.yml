@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_city: MyString
+  from_countr: MyString
+  to_city: MyString
+  to_country: MyString
+  to_when: 2013-11-12
+  from_when: 2013-11-12
+
+two:
+  from_city: MyString
+  from_countr: MyString
+  to_city: MyString
+  to_country: MyString
+  to_when: 2013-11-12
+  from_when: 2013-11-12

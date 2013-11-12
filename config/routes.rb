@@ -5,6 +5,8 @@ Airmule::Application.routes.draw do
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => redirect('/')
   get 'signout'=> 'sessions#destroy', as: 'signout'
+  get 'trips/new' => 'trips#new'
+  post 'trips/create' => 'trips#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

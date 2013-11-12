@@ -1,0 +1,35 @@
+<div id="main" class="clearfix">
+    <h2 class="clearfix">Selecciona un destino.</h2>
+    <h3>Registra tu viaje</h3>
+
+    <form class="gray-box clearfix trips" method="post" action="/trips/create"> 
+
+        <fieldset id="ida"> 
+            <legend class="clearfix">Origen</legend>
+            <input class = "input_big geocomplete" type = "text" placeholder = "Ciudad" id="from_city" name="from_city" />
+            <input class = "input_big geocomplete" type = "text" placeholder = "Pais" id="from_country" name="from_country" />
+            <input class = "input_big date" type = "text" placeholder = "Desde?" id="from_when" name="from_when"/>
+        </fieldset>
+        <fieldset id="regreso">
+            <legend>Destino</legend>
+            <input class = "input_big geocomplete " type = "text" placeholder = "Ciudad" id="to_city" name="to_city" />
+            <input class = "input_big geocomplete " type = "text" placeholder = "Pais" id="to_country" name="to_contry" />
+            <input class = "input_big date" type = "text" placeholder = "Hasta?" id="to_when" name="to_when"/>
+        </fieldset>
+        <fieldset id = "submit">
+            <input type="submit" value="Registrar" class="submit">
+        </fieldset>
+        <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+    </form>
+</div>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<%= javascript_include_tag "jquery.geocomplete.min.js" %>
+<script type="text/javascript">
+$().ready(function() {
+    $('.geocomplete').geocomplete();
+    $.datepicker.formatDate( "dd-mm-yyyy");
+    $( ".date" ).datepicker({
+        inline: true
+    });
+});
+</script>
