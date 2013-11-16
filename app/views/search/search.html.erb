@@ -1,0 +1,37 @@
+<div id="main" class="clearfix">
+           <div id="content">
+                <ul class="clearfix">
+                  <% @trips.each do |trip| -%>
+                  <% trip_user = User.find(trip.user_id) %>
+                    <p>
+                       <li class='clearfix'>
+                            <img src='<%= trip_user.image%>' height='120'/>
+                            <div class='info'>
+                                <p><%= trip_user.name %></p>
+                                <p>Desde: <%= trip.from_city %></p>
+                                <p>Hasta: <%= trip.to_city %></p>
+                                
+                            </div>
+                            <div class='status'>
+                                <p>Fecha: <%= trip.from_when %></p>
+                                <p>Rating: <%= if trip_user.total_rating == nil 
+                                                  0 
+                                                else 
+                                                  trip_user.total_rating
+                                                end 
+                                            %>
+                                </p>
+                                <p>Reviews: <%= if trip_user.total_votes == nil 
+                                                  0 
+                                                else 
+                                                  trip_user.total_votes
+                                                end 
+                                            %></p>
+                            </div>
+                            <a href='profile.php?id=<%= trip_user.id%>' class='ver'>Ver</a>
+                            
+                        </li>
+                    </p>
+                  <% end -%>
+                </ul>
+           </div>

@@ -7,6 +7,11 @@ Airmule::Application.routes.draw do
   get 'signout'=> 'sessions#destroy', as: 'signout'
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
+  get 'search/:search_params' => 'search#search'
+
+  #Ultimo para redireccion de errores
+  #Todo 404 page
+  get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
