@@ -1,9 +1,17 @@
 
 function share (){
-
-	alert ("hola");
+	
+	FB.ui({
+  method: 'feed',
+  link: 'saysquare.com',
+  picture : 'http://i.imgur.com/Jt6yt9Q.png?1',
+    caption: 'Airmule .com :)'
+}, function(response){});
 }
 
 
+$(document).on('click', '#inboxthing', function(){
+	share();
+});
 
-$('#inbox').on('click',share());
+

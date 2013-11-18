@@ -76,7 +76,7 @@
             <div class='photo'>
               <img src='<%= current_user.image %>' height='40'></div>
               <p> <%= current_user.name %> </p>
-              <div class='inbox' id= 'inbox'><a class='inbox ir'></a></div>
+              <div class='inbox'><a href="javascript:void(0)" data-no-turbolink id= 'inboxthing' class='inbox ir'></a></div>
               <%= link_to "Sign out", signout_path, id: "sign_out",class: "logout" %>
             </div>
         <% else %>
