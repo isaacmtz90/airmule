@@ -1,5 +1,6 @@
 Airmule::Application.routes.draw do
   resources :sessions
+  
   root :to => 'static#index' 
   get "/" => "static#index"
   get 'auth/:provider/callback' => 'sessions#create'
@@ -8,6 +9,7 @@ Airmule::Application.routes.draw do
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
   get 'search/:search_params' => 'search#search'
+  get 'user/:user_id' => 'user#show'
 
   #Ultimo para redireccion de errores
   #Todo 404 page

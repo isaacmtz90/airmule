@@ -1,0 +1,21 @@
+<div id="main" class="clearfix">
+    <div id='content' class='profile'>
+        <div class='photo'>
+            <img src='<%= @profile_user.image %>' height='100'>
+        </div>
+        <h2 class='clearfix'><%= @profile_user.name %></h2>
+            <h3>Correo: <%= @profile_user.email %></h3>
+            <h3>Rating:<%= if @profile_user.total_rating == nil 
+                                                  0 
+                                                else 
+                                                  @profile_user.total_rating
+                                                end 
+                                            %></h3>
+            <h3>Calificado <%= if @profile_user.total_votes == nil 
+                                                  0 
+                                                else 
+                                                  @profile_user.total_votes
+                                                end 
+                                            %> veces </h3>
+            <a href='mailto: <%= @profile_user.email %>' class='button' style='margin-left:30px; display:block'>Contactar</a>
+</div>
