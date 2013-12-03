@@ -1,7 +1,11 @@
+
+<% content_for :header do -%>
+  <%= stylesheet_link_tag 'jquery.fancybox' %>
+<% end -%>
 <div id="main" class="clearfix">
     <div id='content' class='profile'>
         <div class='photo'>
-            <img src='<%= @profile_user.image %>' height='100'>
+            <img src='<%= @profile_user.image %>' height='150'>
         </div>
         <h2 class='clearfix'><%= @profile_user.name %></h2>
             <h3>Correo: <%= @profile_user.email %></h3>
@@ -17,5 +21,48 @@
                                                   @profile_user.total_votes
                                                 end 
                                             %> veces </h3>
-            <a href='mailto: <%= @profile_user.email %>' class='button' style='margin-left:30px; display:block'>Contactar</a>
+            <% if !current_user || current_user.id != @profile_user.id %>
+            <a href='#message-box' class='button'>Contactar</a> 
+            <% end %>
+            <div id="message-box" style="display:none;">
+              <% if current_user %>
+                  <div class="message-header">
+                    <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= @profile_user.name %></h3>
+                  </div>
+                  <form>
+                    <textarea></textarea>
+                    <input type="submit" class="submit" value = "Enviar">
+                  </form>
+              <% else %>
+                <div class="message-header">
+                   <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= @profile_user.name %></h3>
+                </div>
+                <form> 
+                  <input type="text" placeholder="Correo electrónico" />
+                  <textarea></textarea>
+                  <input type="submit" class="submit" value = "Enviar">
+                </form>
+              <% end %>
+            </div>
 </div>
+
+<% content_for :footer do -%>
+  <%= javascript_include_tag 'jquery.fancybox'%>
+<% end -%>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".button").fancybox({
+    maxWidth  : 800,
+    maxHeight : 600,
+    fitToView : false,
+    width   : '500px',
+    autoHeight : true,
+    closeClick  : false,
+    padding  : "0",
+    openEffect  : 'fade',
+    closeEffect : 'fade'
+  });
+ 
+});
+
+</script>

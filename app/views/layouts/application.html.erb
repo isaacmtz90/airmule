@@ -20,7 +20,7 @@
   <%= stylesheet_link_tag "main" %>
   <%= stylesheet_link_tag "cupertino/jquery-ui-1.10.3.custom" %>
   <%= javascript_include_tag "vendor/modernizr-2.6.2.min.js" %>
-
+  <%= yield(:header) %>
   <script>window.jQuery || document.write('<script src="../assets/vendor/jquery-1.10.2.min.js"><\/script>')</script>
   <%= javascript_include_tag "jquery-ui-1.10.3.custom.js" %>
   <%= javascript_include_tag "plugins.js" %>
@@ -70,14 +70,17 @@
       <div id="user-widget">
         <% if current_user %>
           <div class='logged'>
-            <div class='add-trip'>
-              <a href='/trips/new'>Agregar Viaje</a>
-            </div>
-            <div class='photo'>
-              <img src='<%= current_user.image %>' height='40'></div>
-              <p> <%= current_user.name %> </p>
-              <div class='inbox'><a href="javascript:void(0)" data-no-turbolink id= 'inboxthing' class='inbox ir'></a></div>
               <%= link_to "Sign out", signout_path, id: "sign_out",class: "logout" %>
+              <div class='inbox'>
+                <a href="javascript:void(0)" data-no-turbolink id= 'inboxthing' class='inbox ir'></a>
+              </div>
+              <p> <%= current_user.name %> </p>
+              <div class='photo'>
+                <img src='<%= current_user.image %>' height='40'>
+              </div>
+              <div class='add-trip'>
+                <a href='/trips/new'>Agregar Viaje</a>
+              </div>
             </div>
         <% else %>
           <%= link_to "Sign up", "/auth/facebook", id: "sign_in",class:"fb ir" %>
@@ -90,7 +93,7 @@
 
   <footer></footer>
         
-  
+  <%= yield(:footer) %>
 
 </body>
 </html>

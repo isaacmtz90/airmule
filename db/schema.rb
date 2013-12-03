@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112233941) do
+ActiveRecord::Schema.define(version: 20131202214002) do
+
+  create_table "messages", force: true do |t|
+    t.integer  "user_id"
+    t.string   "message"
+    t.date     "date"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "id_user_to"
+  end
 
   create_table "trips", force: true do |t|
     t.string   "from_city"
