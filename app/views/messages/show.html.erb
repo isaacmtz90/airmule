@@ -1,0 +1,22 @@
+<div id="main" class="clearfix">
+    <div id='content' class=''>
+    	<ul class="messages">
+			<% @message_users.each do |user_message| -%>
+			    <li>
+			        <%= User.find(email_message.user_id).name %>
+			    </li>
+			<% end -%>
+			<% @message_emails.each do |email_message| -%>
+			    <li>
+			    	<img src='../assets/placeholder_user.png' height='40'>
+			        <a href="<%= email_message.email_sending %>" > <%= email_message.email_sending %></a>
+			    </li>
+			<% end -%>
+		</ul>
+		<div class="conversation"></div>
+    </div>
+</div>
+
+<% content_for :footer do -%>
+  <%= javascript_include_tag 'application'%>
+<% end -%>

@@ -8,5 +8,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  private
+  def message_icon_status
+    @message_icon_status = current_user.messages.where("state like ?", "UNREAD").first
+  end
+  helper_method :message_icon_status
+
 
 end

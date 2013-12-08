@@ -71,8 +71,12 @@
         <% if current_user %>
           <div class='logged'>
               <%= link_to "Sign out", signout_path, id: "sign_out",class: "logout" %>
-              <div class='inbox'>
-                <a href="javascript:void(0)" data-no-turbolink id= 'inboxthing' class='inbox ir'></a>
+              <% if message_icon_status.state == "UNREAD" %>
+                  <div class='inbox unread'>
+                <% else %>
+                  <div class='inbox'>
+                <% end %>
+                <a href="/messages/show" data-no-turbolink id= 'inboxthing' class='inbox ir'></a>
               </div>
               <p> <%= current_user.name %> </p>
               <div class='photo'>

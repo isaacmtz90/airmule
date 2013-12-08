@@ -10,7 +10,7 @@ function share (){
 }
 
 
-$(document).on('click', '#inboxthing', function(){
+$(document).on('click', '#facebook', function(){
 	share();
 });
 
