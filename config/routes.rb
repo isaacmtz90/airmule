@@ -9,6 +9,7 @@ Airmule::Application.routes.draw do
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
   post 'messages/create/:user_id' => 'messages#create'
+  post 'messages/reply_mail/:email' => 'messages#reply_mail'
   get 'messages/show' => 'messages#show'
   get 'search/:search_params' => 'search#search'
   get 'user/:user_id' => 'user#show'

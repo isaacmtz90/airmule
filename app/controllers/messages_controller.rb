@@ -20,23 +20,33 @@ class MessagesController < ApplicationController
 		redirect_to root_url
 	end
 
+	def reply_mail
+		profile_user = User.find(session[:user_id])
+		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email]+".com")
+		redirect_to root_url
+	end
+
 	def message
 		if session[:user_id] == nil
 			redirect_to root_url
 		else
-			response = ""
+			response = "<div class='chat'>"
 			conversation = nil
+			reply_user = 0
 			if params[:conversation].is_number?
 				conversation = Message.where("user_id = ? AND id_user_to = ? OR user_id = ? AND id_user_to = ? ",params[:conversation] ,session[:user_id],session[:user_id],params[:conversation])
+				reply_user = params[:conversation]
 			else
 				conversation = Message.where("user_id = ? AND email_sending = ?",session[:user_id],params[:conversation]+".com").order(:created_at)
-
+				reply_user = params[:conversation]+".com"
 			end
+			
 			conversation.each do |msg|
 				response += "<p>"+ msg.message+"</p>"
-				logger.debug "XD"
 
 			end
+
+			response += "<form method='post' action='/messages/reply_mail/"+reply_user+"'><textarea placeholder='Responder' id='message' name='message'></textarea><input type='submit' class='submit' value = 'Enviar'><input type='hidden' name='" + request_forgery_protection_token.to_s + "' value='" + form_authenticity_token() +"'></form></div>"
 			
 			render :text => response
 		end	
