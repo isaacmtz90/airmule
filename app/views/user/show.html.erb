@@ -29,18 +29,20 @@
                   <div class="message-header">
                     <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= @profile_user.name %></h3>
                   </div>
-                  <form>
-                    <textarea></textarea>
+                  <form method="post" action="/messages/create/<%= @profile_user.id %>">
+                    <textarea placeholder="Mensaje" id="message" name="message"></textarea>
                     <input type="submit" class="submit" value = "Enviar">
+                    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
                   </form>
               <% else %>
                 <div class="message-header">
                    <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= @profile_user.name %></h3>
                 </div>
-                <form> 
-                  <input type="text" placeholder="Correo electrónico" />
-                  <textarea></textarea>
+                <form method="post" action="/messages/create/<%= @profile_user.id %>"> 
+                  <input type="text" placeholder="Correo electrónico" id="email" name="email"/>
+                  <textarea placeholder="Mensaje" id="message" name ="message"></textarea>
                   <input type="submit" class="submit" value = "Enviar">
+                   <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
                 </form>
               <% end %>
             </div>

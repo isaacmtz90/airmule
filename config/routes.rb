@@ -8,6 +8,7 @@ Airmule::Application.routes.draw do
   get 'signout'=> 'sessions#destroy', as: 'signout'
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
+  post 'messages/create/:user_id' => 'messages#create'
   get 'search/:search_params' => 'search#search'
   get 'user/:user_id' => 'user#show'
 
