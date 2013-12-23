@@ -1,3 +1,7 @@
+
+<% content_for :header do -%>
+  <%= stylesheet_link_tag 'jquery.fancybox' %>
+<% end -%>
 <div id="main" class="clearfix">
            <div id="content">
                 <ul class="clearfix">
@@ -8,30 +12,65 @@
                             <img src='<%= trip_user.image%>' height='120'/>
                             <div class='info'>
                                 <p><%= trip_user.name %></p>
-                                <p>Desde: <%= trip.from_city %></p>
-                                <p>Hasta: <%= trip.to_city %></p>
+                                <p><b>Desde:</b> <%= trip.from_city %></p>
+                                <p><b>Hasta:</b> <%= trip.to_city %></p>
                                 
                             </div>
                             <div class='status'>
-                                <p>Fecha: <%= trip.from_when %></p>
-                                <p>Rating: <%= if trip_user.total_rating == nil 
-                                                  0 
-                                                else 
-                                                  trip_user.total_rating
-                                                end 
-                                            %>
-                                </p>
-                                <p>Reviews: <%= if trip_user.total_votes == nil 
-                                                  0 
-                                                else 
-                                                  trip_user.total_votes
-                                                end 
-                                            %></p>
+                                <p><b>Fecha de Viaje:</b> <%= trip.from_when %></p>
+                                 <p><b>Correo:</b> <%= trip_user.email %></p>
+        
                             </div>
-                            <a href='../user/<%= trip_user.id%>' class='ver'>Ver</a>
+                           <% if !current_user || current_user.id != trip_user.id %>
+                              <a href='#message-box' class='button' style="clear:left;margin-left:0;">Contactar</a> 
+                              <% end %>
+                              <div id="message-box" style="display:none;">
+                                <% if current_user %>
+                                    <div class="message-header">
+                                      <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= trip_user.name %></h3>
+                                    </div>
+                                    <form method="post" action="/messages/create/<%= trip_user.id %>">
+                                      <textarea placeholder="Mensaje" id="message" name="message"></textarea>
+                                      <input type="submit" class="submit" value = "Enviar">
+                                      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+                                    </form>
+                                <% else %>
+                                  <div class="message-header">
+                                     <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= trip_user.name %></h3>
+                                  </div>
+                                  <form method="post" action="/messages/create/<%= trip_user.id %>"> 
+                                    <input type="text" placeholder="Correo electrónico" id="email" name="email"/>
+                                    <textarea placeholder="Mensaje" id="message" name ="message"></textarea>
+                                    <input type="submit" class="submit" value = "Enviar">
+                                     <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+                                  </form>
+                                <% end %>
+                              </div>
                             
                         </li>
                     </p>
                   <% end -%>
                 </ul>
            </div>
+
+
+<% content_for :footer do -%>
+  <%= javascript_include_tag 'jquery.fancybox'%>
+<% end -%>
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".button").fancybox({
+    maxWidth  : 800,
+    maxHeight : 600,
+    fitToView : false,
+    width   : '500px',
+    autoHeight : true,
+    closeClick  : false,
+    padding  : "0",
+    openEffect  : 'fade',
+    closeEffect : 'fade'
+  });
+ 
+});
+
+</script>

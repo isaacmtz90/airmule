@@ -96,6 +96,10 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+html{
+    min-width:1000px;
+}
+
 body,html{
      background: white;
      height: 100%;
@@ -387,13 +391,11 @@ h1{
     cursor: pointer;
     border: 0;
     padding: 15px 19px;
-    margin-top: 50px;
     text-decoration: none;
     width: 84px;
     display: block;
     height: 20px;
     float: left;
-    margin-left: 60px;
 }
 
 #content.profile{
@@ -483,8 +485,13 @@ legend{
     display: block;
 }
 
+.trips input{
+    margin-left:5px;
+    margin-right:5px;
+}
+
 .trips .submit{
-    margin-top: 15px;
+    margin-top: 25px;
     margin-bottom:10px;
 }
 
