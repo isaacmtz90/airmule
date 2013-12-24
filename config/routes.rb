@@ -9,11 +9,12 @@ Airmule::Application.routes.draw do
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
   post 'messages/create/:user_id' => 'messages#create'
-  post 'messages/reply_mail/:email' => 'messages#reply_mail'
+  post 'messages/reply_to_email/:email' => 'messages#reply_to_email', constraints:{ email: /[^\/]+/ }
+  post 'messages/reply_to_user/:user_id' => 'messages#reply_to_user'
   get 'messages/show' => 'messages#show'
   get 'search/:search_params' => 'search#search'
   get 'user/:user_id' => 'user#show'
-  get 'messages/:conversation' => 'messages#message'
+  get 'messages/:conversation' => 'messages#message', constraints:{ conversation: /[^\/]+/ }
 
   #Ultimo para redireccion de errores
   #Todo 404 page

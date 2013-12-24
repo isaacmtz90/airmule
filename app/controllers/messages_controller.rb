@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-
+	#TODO: RENAME USER_TO , to USER_FROM
+	#TODO: Deactivate mails from messages
 	def show
 		if session[:user_id] == nil
 			redirect_to root_url
@@ -20,13 +21,24 @@ class MessagesController < ApplicationController
 		redirect_to root_url
 	end
 
-	def reply_mail
+	def reply_to_email
 		profile_user = User.find(session[:user_id])
-		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email]+".com")
+		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email])
+		email_body = "Haz recibido un mensaje en Airmule de " + profile_user.email + ":<br>" + params[:message]
+		MessageMailer.reply_email(params[:email],email_body).deliver
+		redirect_to root_url
+	end
+
+	def reply_to_user
+		profile_user = User.find( params[:user_id])
+		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, id_user_to: session[:user_id])
+		email_body = "Haz recibido un mensaje en Airmule: <br>" + params[:message]
+		MessageMailer.reply_email(profile_user.email,email_body).deliver
 		redirect_to root_url
 	end
 
 	def message
+		replyRegisteredUSer = false;
 		if session[:user_id] == nil 
 			redirect_to root_url
 		else
@@ -34,19 +46,29 @@ class MessagesController < ApplicationController
 			conversation = nil
 			reply_user = 0
 			if params[:conversation].is_number?
-				conversation = Message.where("user_id = ? AND id_user_to = ? OR user_id = ? AND id_user_to = ? ",params[:conversation] ,session[:user_id],session[:user_id],params[:conversation])
+				replyRegisteredUSer = true;
+				conversation = Message.where("user_id = '?' AND id_user_to = ? OR user_id = ? AND id_user_to = '?'",session[:user_id],params[:conversation] ,params[:conversation],session[:user_id])
 				reply_user = params[:conversation]
 			else
-				conversation = Message.where("user_id = ? AND email_sending = ?",session[:user_id],params[:conversation]+".com").order(:created_at)
-				reply_user = params[:conversation]+".com"
+				conversation = Message.where("user_id = ? AND email_sending = ?",session[:user_id],params[:conversation]).order(:created_at)
+				reply_user = params[:conversation]
 			end
 			
 			conversation.each do |msg|
+				if msg.user_id == session[:user_id]
+					msg.update_attributes(state: "READ")	
+				end
 				response += "<p>"+ msg.message+"</p>"
 
 			end
 
-			response += "<form method='post' action='/messages/reply_mail/"+reply_user+"'><textarea placeholder='Responder' id='message' name='message'></textarea><input type='submit' class='submit' value = 'Enviar'><input type='hidden' name='" + request_forgery_protection_token.to_s + "' value='" + form_authenticity_token() +"'></form></div>"
+			if replyRegisteredUSer
+				response += "<form method='post' action='/messages/reply_to_user/"+reply_user+"'><textarea placeholder='Responder' id='message' name='message'></textarea><input type='submit' class='submit' value = 'Responder'><input type='hidden' name='" + request_forgery_protection_token.to_s + "' value='" + form_authenticity_token() +"'></form></div>"
+			else
+				response += "<form method='post' action='/messages/reply_to_email/"+reply_user+"'><textarea placeholder='Responder' id='message' name='message'></textarea><input type='submit' class='submit' value = 'Responder al correo'><input type='hidden' name='" + request_forgery_protection_token.to_s + "' value='" + form_authenticity_token() +"'></form></div>"
+			end
+
+			
 			
 			render :text => response
 		end	
