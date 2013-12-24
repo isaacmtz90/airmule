@@ -10,6 +10,9 @@ gem 'pg'
 gem 'rails_12factor'
 gem 'rails_serve_static_assets'
 
+#New Relic
+gem 'newrelic_rpm'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
