@@ -13,8 +13,15 @@ if (window.location.hash == '#_=_') {
             echo " <h3>Viaje creado exitosamente!</h3> ";
         }
     ?>-->
-    <h2 class="clearfix">Selecciona un destino.</h2>
-    <h3>Envia tu paquete</h3>
+    <%
+        if @mensaje
+    %>
+            <h3><%= @mensaje %>!</h3>
+    <%           
+        end
+    %>
+    <h2 class="clearfix">Encuentra Viajeros.</h2>
+    <h3>Envia Tu Paquete</h3>
 
     <form class="gray-box clearfix" method="get" action="/search/s">  
         <input class = "input_big" type = "text" placeholder = "Que destino buscas?" id="to" name="to" />

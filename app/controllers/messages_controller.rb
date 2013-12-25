@@ -5,35 +5,59 @@ class MessagesController < ApplicationController
 		if session[:user_id] == nil
 			redirect_to root_url
 		else
-			@message_users = current_user.messages.select("DISTINCT ON (id_user_to) *").where("id_user_to != ''")
-			@message_emails = current_user.messages.select("DISTINCT ON (email_sending) *").where("email_sending != ''")
+			@message_users = current_user.messages.select("DISTINCT ON (id_user_to) *").where("id_user_to != ''  AND user_id::varchar != id_user_to ")
+			@message_emails = current_user.messages.select("DISTINCT ON (email_sending) *").where("email_sending != '' ")
 		end
 	end
 
 	def create
-		profile_user = User.find(params[:user_id])
-		if session[:user_id] != nil
-			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now,id_user_to: current_user.id)
+		if !params[:message].emtpy?
+			profile_user = User.find(params[:user_id])
+			if session[:user_id] != nil
+				profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now,id_user_to: current_user.id)
+				email_body = "Haz recibido un mensaje en Airmule: <br><br>" + params[:message]
+				MessageMailer.reply_email(profile_user.email,email_body).deliver
+				session[:message] = "Mensaje enviado exitosamente"
+			else
+				if !params[:email].emtpy?
+					profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email])
+					email_body = "Haz recibido un mensaje en Airmule: <br><br>" + params[:message]
+					MessageMailer.reply_email(profile_user.email,email_body).deliver
+					session[:message] = "Mensaje enviado exitosamente"
+				end
+			end	
 		else
-			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email])
-			
+			session[:message] = "Error: No deje campos vacios"
 		end
+		
 		redirect_to root_url
 	end
 
 	def reply_to_email
-		profile_user = User.find(session[:user_id])
-		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email])
-		email_body = "Haz recibido un mensaje en Airmule de " + profile_user.email + ":<br>" + params[:message]
-		MessageMailer.reply_email(params[:email],email_body).deliver
+		if !params[:message].emtpy?
+			profile_user = User.find(session[:user_id])
+			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email],id_user_to: session[:user_id])
+			email_body = "Haz recibido un mensaje en Airmule de " + profile_user.email + ":<br><br>" + params[:message]
+			MessageMailer.reply_email(params[:email],email_body).deliver
+			session[:message] = "Mensaje enviado exitosamente"
+		else
+			session[:message] = "Error: No deje campos vacios"
+		end
+		
 		redirect_to root_url
 	end
 
 	def reply_to_user
-		profile_user = User.find( params[:user_id])
-		profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, id_user_to: session[:user_id])
-		email_body = "Haz recibido un mensaje en Airmule: <br>" + params[:message]
-		MessageMailer.reply_email(profile_user.email,email_body).deliver
+		if !params[:message].emtpy?
+			profile_user = User.find( params[:user_id])
+			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, id_user_to: session[:user_id])
+			email_body = "Haz recibido un mensaje en Airmule: <br><br>" + params[:message]
+			MessageMailer.reply_email(profile_user.email,email_body).deliver
+			session[:message] = "Mensaje enviado exitosamente"
+		else
+			session[:message] = "Error: No deje campos vacios"
+		end
+		
 		redirect_to root_url
 	end
 
@@ -42,7 +66,7 @@ class MessagesController < ApplicationController
 		if session[:user_id] == nil 
 			redirect_to root_url
 		else
-			response = "<div class='chat'>"
+			response = "<div class='chat' id='chat-box'>"
 			conversation = nil
 			reply_user = 0
 			if params[:conversation].is_number?
@@ -55,10 +79,12 @@ class MessagesController < ApplicationController
 			end
 			
 			conversation.each do |msg|
-				if msg.user_id == session[:user_id]
+				clase = "right"
+				if msg.user_id == session[:user_id] && msg.user_id.to_s != msg.id_user_to
+					clase = "left"
 					msg.update_attributes(state: "READ")	
 				end
-				response += "<p>"+ msg.message+"</p>"
+				response += "<div class='"+clase+" tooltip'><p>"+ msg.message+"</p><div class='tail1'></div><div class='tail2'></div></div>"
 
 			end
 

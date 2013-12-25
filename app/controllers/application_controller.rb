@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   private
   def message_icon_status
-    @message_icon_status = current_user.messages.where("state like ?", "UNREAD").first
+    @message_icon_status = current_user.messages.where("state like ? AND (user_id::varchar != id_user_to OR COALESCE(id_user_to, '') = '')", "UNREAD").first
   end
   helper_method :message_icon_status
 

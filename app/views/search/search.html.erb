@@ -50,6 +50,13 @@
                         </li>
                     </p>
                   <% end -%>
+                  <%if @trips.blank?
+                    %>
+                      <p><b>No existen viajes con los parametros ingresados!</b></p>
+                       <a href='/' class='button' style="clear:left;margin-left:0;">Regresar</a> 
+                    <%
+                    end
+                  %>
                 </ul>
            </div>
 

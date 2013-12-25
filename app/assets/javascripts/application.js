@@ -16,9 +16,12 @@
 //= require_tree .
 
 if($(".messages li a").length > 0){
-	$('.messages li a').bind('click', function(e) {           
-	  var url = $(this).attr('href');
+	$('.messages li').bind('click', function(e) {           
+	  var url = $(this).children('a').eq(0).attr('href');
 	  $('div.conversation').load(url); // load the html response into a DOM element
+	  $(".messages li ").removeClass("selected");
+	  $(this).addClass("selected");
 	  e.preventDefault(); // stop the browser from following the link
 	});
 }
+

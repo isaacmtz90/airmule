@@ -3,13 +3,13 @@
     	<ul class="messages">
 			<% @message_users.each do |user_message| -%>
 			    <li>
-			    	<img src="<%= User.find(user_message.user_id).image %>" height='40'>
+			    	<span><img src="<%= User.find(user_message.user_id).image %>"></span>
 			        <a href="<%= user_message.id_user_to %>" > <%= User.find(user_message.id_user_to).name %></a>
 			    </li>
 			<% end -%>
 			<% @message_emails.each do |email_message| -%>
 			    <li>
-			    	<img src='../assets/placeholder_user.png' height='40'>
+			    	<span><img src='../assets/placeholder_user.png'></span>
 			        <a href="<%= email_message.email_sending %>" > <%= email_message.email_sending %></a>
 			    </li>
 			<% end -%>
