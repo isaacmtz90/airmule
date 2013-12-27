@@ -4,8 +4,8 @@ class MessagesController < ApplicationController
 		if session[:user_id] == nil
 			redirect_to root_url
 		else
-			@message_users = current_user.messages.where('id_user_to != ""').group(:id_user_to)
-			@message_emails = current_user.messages.where('email_sending != ""').group(:email_sending)
+			@message_users = current_user.messages.select("DISTINCT ON (id_user_to) *").where("id_user_to != ''")
+			@message_emails = current_user.messages.select("DISTINCT ON (email_sending) *").where("email_sending != ''")
 		end
 	end
 
