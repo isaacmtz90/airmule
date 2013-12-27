@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
 	end
 
 	def message
-		if session[:user_id] == nil
+		if session[:user_id] == nil 
 			redirect_to root_url
 		else
 			response = "<div class='chat'>"
