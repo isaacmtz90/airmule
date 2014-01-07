@@ -15,6 +15,7 @@ Airmule::Application.routes.draw do
   get 'search/:search_params' => 'search#search'
   get 'user/:user_id' => 'user#show'
   get 'messages/:conversation' => 'messages#message', constraints:{ conversation: /[^\/]+/ }
+  get 'user/:user_id/trips' => 'trips#show_by_user'
 
   #Ultimo para redireccion de errores
   #Todo 404 page

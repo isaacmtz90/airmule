@@ -20,4 +20,24 @@ class TripsController < ApplicationController
 		end
 		redirect_to root_url
 	end
+
+	def edit
+
+		@trip = Trip.find(params[:trip_id])
+		
+	end		
+
+	def show_by_user 
+		if session[:user_id] != nil
+			logger.debug "WTFFFF"
+			logger.debug params[:from_when]
+			logger.debug params[:to_when]
+			@loggeduser = User.find(params[:user_id])
+			@trips= @loggeduser.trips
+			logger.debug @trips
+			
+			#TODO: mandar mensaje para el usuario
+		end
+
+	end
 end
