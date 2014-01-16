@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 	def search
 		@trips = [];
-		if params[:from] != "" && params[:to] != ""
+		if params[:from] != "" && params[:to] != "" && params[:date] != ""
 			from_search = "%#{params[:from].upcase}%"
 			to_search = "%#{params[:to].upcase}%"
 			trip_date = Date.parse(params[:date])
