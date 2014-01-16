@@ -24,7 +24,7 @@
                            <% if !current_user || current_user.id != trip_user.id %>
                               <a href='#message-box-<%=trip_user.id%>' class='button' style="clear:left;margin-left:0;">Contactar</a> 
                               <% end %>
-                              <div id="message-box-<%=trip_user.id%>" style="display:none;">
+                              <div id="message-box-<%=trip_user.id%>" class="message-box" style="display:none;">
                                 <% if current_user %>
                                     <div class="message-header">
                                       <h4 class="title" id="global-tweet-dialog-header">Enviar mensaje a <%= trip_user.name %></h3>
