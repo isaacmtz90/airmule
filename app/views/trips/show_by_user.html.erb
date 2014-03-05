@@ -1,0 +1,35 @@
+<div id="main" class="clearfix">
+	<h2 class="clearfix">Viajes de <%=@loggeduser.name%></h2>
+
+	
+	<div id="content">
+		<ul class="clearfix">
+			<% @trips.each do |trip|%>
+			<p>
+				<li class='clearfix'>
+
+					<div class='info'>
+						
+						<p><b>Desde:</b> <%= trip.from_city %></p>
+						<p><b>Hasta:</b> <%= trip.to_city %></p>
+
+					</div>
+					<div class='status'>
+						<p><b>Fecha de Viaje:</b> <%= trip.from_when %></p>
+
+
+					</div>
+					<% if current_user || current_user.id == @loggeduser.id %>
+					<p>editar</p>
+					<%end%>
+
+
+				</li>
+			</p>
+			<%	end%>
+		</ul>
+	</div>
+
+
+	
+</div>
