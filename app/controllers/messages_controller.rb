@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
 	end
 
 	def create
-		if !params[:message].emtpy?
+		if !params[:message].empty?
 			profile_user = User.find(params[:user_id])
 			if session[:user_id] != nil
 				profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now,id_user_to: current_user.id)
@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
 				MessageMailer.reply_email(profile_user.email,email_body).deliver
 				session[:message] = "Mensaje enviado exitosamente"
 			else
-				if !params[:email].emtpy?
+				if !params[:email].empty?
 					profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email])
 					email_body = "Haz recibido un mensaje en Airmule: <br><br>" + params[:message]
 					MessageMailer.reply_email(profile_user.email,email_body).deliver
@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
 	end
 
 	def reply_to_email
-		if !params[:message].emtpy?
+		if !params[:message].empty?
 			profile_user = User.find(session[:user_id])
 			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, email_sending: params[:email],id_user_to: session[:user_id])
 			email_body = "Haz recibido un mensaje en Airmule de " + profile_user.email + ":<br><br>" + params[:message]
@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
 	end
 
 	def reply_to_user
-		if !params[:message].emtpy?
+		if !params[:message].empty?
 			profile_user = User.find( params[:user_id])
 			profile_user.messages.create(message: params[:message],state: "UNREAD",date:  Time.now, id_user_to: session[:user_id])
 			email_body = "Haz recibido un mensaje en Airmule: <br><br>" + params[:message]
