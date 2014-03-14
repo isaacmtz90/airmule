@@ -364,6 +364,7 @@ a.settings{
     -webkit-border-radius: 3px;
     border-radius: 3px;
     overflow: auto;
+    overflow-x: hidden;
     background: rgba(255, 255, 255, .8);
   /*  filter:alpha(opacity=90); /* For IE8 and earlier */
    background: rgba(255, 255, 255, .8);
