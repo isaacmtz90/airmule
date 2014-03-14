@@ -1,0 +1,54 @@
+<style>
+
+#content {
+	height: initial; 
+}
+</style>
+<div id="main" class="clearfix">
+	<h2 class="clearfix">Editar Tu Cuenta</h2>
+
+	
+	<div id="content">
+		<ul class="clearfix">
+			<h3>Viajes</h3>
+			<% @trips.each do |trip|%>
+			<p>
+				<li class='clearfix'>
+
+					<div class='info'>
+						
+						<p><b>Desde:</b> <%= trip.from_city %></p>
+						<p><b>Hasta:</b> <%= trip.to_city %></p>
+
+					</div>
+					<div class='status'>
+						<p><b>Fecha de Viaje:</b> <%= trip.from_when %></p>
+						<% if current_user && current_user.id == @loggeduser.id %>
+
+							<form action="/../trips/delete/<%= trip.id%>" method="post">
+								<input type="submit" class="submit" value="Eliminar">
+								<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+							</form>
+							<br>
+
+						<%end%>
+
+					</div>
+					
+
+
+				</li>
+			</p>
+			<%	end%>
+			<h3>Borrar Cuenta</h3>
+			<form action="delete" method="post">
+								<input type="submit" class="submit red" value="Eliminar Cuenta">
+								<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+							</form>
+		</ul>
+		
+	</div>
+
+
+	
+</div>

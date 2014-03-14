@@ -192,6 +192,18 @@ footer{
     margin-top: -2px;
 }
 
+.submit.red{
+    background-color: red;
+    background-image: -webkit-linear-gradient( #FF7878, red);
+    background-image: linear-gradient( #FF7878, red);
+}
+
+.submit.red:hover{
+    background-color: red;
+    background-image: -webkit-linear-gradient(#FFB2B2, rgb(255, 19, 19));
+    background-image: linear-gradient(#FFB2B2, rgb(255, 19, 19));
+}
+
 h2{
     color: #fff;
     line-height: 1.1;
@@ -296,6 +308,18 @@ h1{
 
 }
 
+a.settings{
+    background: url("settings.png") no-repeat;
+    width: 20px;
+    height: 15px;
+    display: block;
+    float: right;
+    margin-left:5px;
+    margin-right:0px;
+    
+
+}
+
 .unread.inbox a{
     background: url("inbox-unread.png") no-repeat;
 }
@@ -312,6 +336,13 @@ h1{
     padding-left: 10px;
     width: 60px;
     float: right;
+}
+
+.settings-text{
+    font-weight: bold;
+    color:#888;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .logout:hover{
@@ -412,6 +443,21 @@ h1{
 
 }
 
+.profile .profile-image{
+    height:150px;
+    width:150px;
+    clear:both;
+  //  margin-left:auto;
+   // margin-right:auto;
+ //   margin-top:0px;
+    margin-left:30px;
+    margin-right:0;
+    float:left;
+    display:block;
+    border-radius:50%;
+    background-size:cover;
+}  
+
 .profile h2{
     color: #2492db;
     text-shadow: none;
@@ -474,6 +520,8 @@ h1{
     background-image: -webkit-linear-gradient(#5EC7FF, #2492db);
     background-image: linear-gradient(#5EC7FF, #2492db);
 }
+
+
 
 legend{
     color:#fff;
@@ -799,6 +847,9 @@ ul.messages{
 .chat{
     float:left;
 }
+
+
+
 
 /* ==========================================================================
    Helper classes

@@ -53,8 +53,10 @@
                 <% end %>
                 <a href="/messages/show" data-no-turbolink id= 'inboxthing' class='inbox ir'></a>
               </div>
-              <p> <%= current_user.name %> </p>
+              <p class=""> <a href="/user/edit" data-no-turbolink id= 'inboxthing' class='settings ir'></a> <a class="settings-text" href="/user/edit" data-no-turbolink> <%= current_user.name %> </a></p>
+              
               <div class='photo'>
+                 
                 <img src='<%= current_user.image %>' height='40'>
               </div>
               <div class='add-trip'>

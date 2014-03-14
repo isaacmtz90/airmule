@@ -14,13 +14,16 @@ Airmule::Application.routes.draw do
   post 'messages/reply_to_user/:user_id' => 'messages#reply_to_user'
   get 'messages/show' => 'messages#show'
   get 'search/:search_params' => 'search#search'
+  get 'user/edit' => 'user#edit'
+  post 'user/delete' => 'user#delete'
   get 'user/:user_id' => 'user#show'
   get 'messages/:conversation' => 'messages#message', constraints:{ conversation: /[^\/]+/ }
   get 'user/:user_id/trips' => 'trips#show_by_user'
 
+
   #Ultimo para redireccion de errores
   #Todo 404 page
-  #get '*path' => redirect('/')
+  get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
