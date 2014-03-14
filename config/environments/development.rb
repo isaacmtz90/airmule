@@ -28,14 +28,14 @@ Airmule::Application.configure do
   config.assets.debug = true
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-  :address        => 'smtp.sendgrid.net',
-  :port           => '587',
-  :authentication => :plain,
-  :user_name      => 'app20193396@heroku.com',
-  :password       => 'rgfyf2vb',
-  :domain         => 'heroku.com',
-  :enable_starttls_auto => true
-}
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'app20193396@heroku.com',
+    :password       => 'rgfyf2vb',
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
 
 
 end

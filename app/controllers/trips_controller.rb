@@ -25,7 +25,20 @@ class TripsController < ApplicationController
 
 		@trip = Trip.find(params[:trip_id])
 		
-	end		
+	end	
+
+	def delete
+		if session[:user_id] != nil
+			@loggeduser = User.find(session[:user_id] )
+			user_trip = @loggeduser.trips.find(params[:trip_id])
+			if user_trip
+				user_trip.destroy()
+				session[:message] = "Viaje borrado exitosamente"
+			end
+			
+		end
+		redirect_to root_url
+	end	
 
 	def show_by_user 
 		if session[:user_id] != nil

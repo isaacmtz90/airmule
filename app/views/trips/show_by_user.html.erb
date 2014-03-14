@@ -1,3 +1,9 @@
+<style>
+
+#content {
+	height: initial; 
+}
+</style>
 <div id="main" class="clearfix">
 	<h2 class="clearfix">Viajes de <%=@loggeduser.name%></h2>
 
@@ -16,12 +22,18 @@
 					</div>
 					<div class='status'>
 						<p><b>Fecha de Viaje:</b> <%= trip.from_when %></p>
+						<% if current_user && current_user.id == @loggeduser.id %>
 
+							<form action="/../trips/delete/<%= trip.id%>" method="post">
+								<input type="submit" class="submit" value="Eliminar">
+								<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+							</form>
+							<br>
+
+						<%end%>
 
 					</div>
-					<% if current_user || current_user.id == @loggeduser.id %>
-					<p>editar</p>
-					<%end%>
+					
 
 
 				</li>

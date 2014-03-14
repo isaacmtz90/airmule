@@ -8,6 +8,7 @@ Airmule::Application.routes.draw do
   get 'signout'=> 'sessions#destroy', as: 'signout'
   get 'trips/new' => 'trips#new'
   post 'trips/create' => 'trips#create'
+  post 'trips/delete/:trip_id' => 'trips#delete'
   post 'messages/create/:user_id' => 'messages#create'
   post 'messages/reply_to_email/:email' => 'messages#reply_to_email', constraints:{ email: /[^\/]+/ }
   post 'messages/reply_to_user/:user_id' => 'messages#reply_to_user'
